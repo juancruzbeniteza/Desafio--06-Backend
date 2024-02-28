@@ -1,0 +1,12 @@
+<section>
+    <article class="d-flex flex-wrap justify-content-center" id="products">
+        {{#each products}}
+            <div class="card m-2" style="width: 18rem;">
+                <img src={{this.photo}} class="card-img-top" style="height: 240px; object-fit: cover;" alt="{{this.title}}">
+                <div class="card-body">
+                    <h5 class="card-title text-center">{{this.title}}</h5>
+                </div>
+            </div>
+        {{/each}}
+    </article>
+</section>

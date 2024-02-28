@@ -1,0 +1,23 @@
+<section class="w-50 mb-4 d-flex flex-column justify-content-start align-items-center" style="min-width: 18rem;">
+    <h2 class="mt-5 mb-2 text-center">Crear nuevo usuario</h2>
+    <form style="max-width: 18rem;" class="w-100 d-flex flex-column justify-content-center align-items-center">
+        <fieldset class="mb-3 text-center">
+            <label for="name" class="form-label mb-0">Nombre</label>
+            <input type="text" class="form-control" id="name">
+        </fieldset>
+        <fieldset class="mb-3 text-center">
+            <label for="photo" class="form-label mb-0">Foto</label>
+            <input type="text" class="form-control" id="photo">
+        </fieldset>
+        <fieldset class="mb-3 text-center">
+            <label for="email" class="form-label mb-0">Email</label>
+            <input type="email" class="form-control" id="email">
+        </fieldset>
+        <button id="newUser" type="button" class="w-100 btn btn-danger">Crear</button>
+    </form>
+    <button id="Login" type="button" class="w-100 btn btn-danger">Login</button>
+</section>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/register.js"></script>
+<script src="/public/passport-config.js"></script>
