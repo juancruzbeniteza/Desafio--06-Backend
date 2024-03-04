@@ -1,9 +1,8 @@
-
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 import bcrypt from 'bcrypt';
 import GitHubStrategy from 'passport-github2';
-import { getUserByEmail, getUserById } from '../src/data/memory/user.memory';
+import {Manager} from '../src/data/memory/user.memory.js'
 
 function initialize(passport, getUserByEmail, getUserById) {
   passport.use(
@@ -12,7 +11,7 @@ function initialize(passport, getUserByEmail, getUserById) {
       if (!user) {
         return done(null, false, { message: 'Usuario no encontrado' });
       }
-
+  
       try {
         if (await bcrypt.compare(password, user.password)) {
           return done(null, user);
@@ -25,23 +24,26 @@ function initialize(passport, getUserByEmail, getUserById) {
     })
   );
 
-// GitHub Strategy
-passport.use(new GitHubStrategy(
-  {
-    clientID: process.env.GITHUB_CLIENT_ID,
-    clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    callbackURL: process.env.GITHUB_CALLBACK_URL,
-  },
-  (accessToken, refreshToken, profile, done) => {
-    // Find or create user based on GitHub profile
-    const user = getUserByGitHubId(profile.id);
+  // GitHub Strategy
+  passport.use(new GitHubStrategy(
+    {
+      clientID: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      callbackURL: process.env.GITHUB_CALLBACK_URL,
+    },
+    (accessToken, refreshToken, profile, done) => {
+      // Assuming you have a function getUserByGitHubId
+      // that retrieves a user by their GitHub ID
+      const user = getUserByGitHubId(profile.id);
 
-    return done(null, user);
-  }
-));
+      return done(null, user);
+    }
+  ));
 
-  passport.serializeUser((user, done) => done(null, user.id));
-  passport.deserializeUser((id, done) => done(null, getUserById(id)));
+  passport.serializeUser((user, done) => done(null, user._id));
+  passport.deserializeUser(async (id, done) => {
+    const user = await getUserById(id);
+    done(null, user);
+  });
 }
-
 export default initialize;

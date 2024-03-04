@@ -9,13 +9,13 @@ usersRouter.post("/", propsUser, async (req, res, next) => {
       const data = req.body;
       const response = await ManagerUser.create(data);
       
-        return res.json({
-          statusCode: 201,
-          response,
-        });
+      return res.json({
+        statusCode: 201,
+        response,
+      });
       
     } catch (error) {
-        return next(error);
+      return next(error);
     }
   });
 

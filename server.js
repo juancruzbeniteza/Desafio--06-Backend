@@ -12,7 +12,7 @@ import errorHandler from "./src/middlewares/ErrorH.js";
 import pathHandler from "./src/middlewares/HandlePath.js";
 import __dirname from "./utils.js";
 import socketUtils from "./src/utils/sockets.utils.js"
-import initialize from "./public/passport-config.js";
+import initialize from "./auth/passport-config.js";
 import passport from 'passport';
 
 

@@ -3,6 +3,7 @@ import express from 'express';
 import passport from 'passport';
 import flash from 'connect-flash';
 
+const server = express(); 
 server.use(flash());
 
 
