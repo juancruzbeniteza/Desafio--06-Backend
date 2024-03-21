@@ -1,14 +1,30 @@
+<section
+    class="w-50 mb-4 d-flex flex-column justify-content-start align-items-center"
+    style="min-width: 380px;"
+  >
+    <h2 class="mt-5 mb-2 text-center">INICIAR SESION!</h2>
+    <form
+      style="max-width: 360px;"
+      class="w-100 d-flex flex-column justify-content-center items-align-center"
+    >
+      <fieldset class="mb-3 text-center">
+        <label for="email" class="form-label mb-0">Email</label>
+        <input type="email" class="form-control" id="email" />
+      </fieldset>
+      <fieldset class="mb-3 text-center">
+        <label for="password" class="form-label mb-0">Password</label>
+        <input type="password" class="form-control" id="password" />
+      </fieldset>
+      
+      <button
+        id="login"
+        type="button"
+        class="w-100 btn btn-danger"
+      >Login</button>
+    </form>
+    <button id="google" type="button" class="w-100 btn btn-danger mt-3">Google!</button>
+  </section>
 
-<form action="/login" method="POST">
-  <label for="email">Email:</label>
-  <input type="email" name="email" required>
-
-  <label for="password">Password:</label>
-  <input type="password" name="password" required>
-
-  <button type="submit">Login</button>
-</form>
-
-<hr>
-
-<a href="/auth/github">Login with GitHub</a>
+  
+<script src="/login.js"></script>
+  

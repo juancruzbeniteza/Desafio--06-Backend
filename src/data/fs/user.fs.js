@@ -36,7 +36,7 @@ class UserManager{
             this.path,
             JSON.stringify(UserManager.#user, null, 2)
           );
-          return "Nuevo usuario creado";
+          return "Usuario creado";
         } catch (error) {
           return error.message;
         }
@@ -45,7 +45,7 @@ class UserManager{
     read(){
       try {
         if (UserManager.#user.length === 0) {
-          throw new Error("No se encontro ningun usuario");
+          throw new Error("No se encontraron usuarios!");
         } else {
           return UserManager.#user;
         }
@@ -60,7 +60,7 @@ class UserManager{
           (user) => user.id === id
         );
         if (!user) {
-          throw new Error("No se encontro ningun usuario");
+          throw new Error("No se encontro usuario!");
         } else {
           return user;
         }
@@ -75,7 +75,7 @@ class UserManager{
           (product) => product.id === id
         );
         if (!user) {
-          throw new Error("No se encontro ningun usuario");
+          throw new Error("No se encontro usuario!");
         } else {
           const index = UserManager.#user.indexOf(user);
           UserManager.#user.splice(index, 1);
@@ -95,7 +95,7 @@ class UserManager{
        const one= this.readOne(id);
   
         if(!one){
-          throw new Error("No se encontro ningun usuario con ese ID")
+          throw new Error("No se encontro usuario!")
         }else{
           one.name= data.name || one.name,
           one.photo= data.photo || one.photo,
@@ -106,7 +106,7 @@ class UserManager{
             JSON.stringify(UserManager.#user, null, 2)
           );
   
-          return "Usuario actualizado"
+          return "usuario actualizada"
         }
   
       } catch (error) {

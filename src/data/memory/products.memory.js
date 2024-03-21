@@ -2,14 +2,11 @@ import crypto from "crypto";
 
 class ProductManager {
   static #products = [];
+  constructor() {
+  }
 
   create(data) {
     try {
-      // Verificar que se proporcionen todos los campos obligatorios antes de crear un nuevo producto
-      if (!data.title || !data.photo || !data.price || !data.stock) {
-        throw new Error("Todos los campos (título, foto, precio, stock) son obligatorios");
-      }
-
       const newProduct = {
         id: crypto.randomBytes(12).toString("hex"),
         title: data.title,
@@ -18,8 +15,14 @@ class ProductManager {
         stock: data.stock,
       };
 
-      ProductManager.#products.push(newProduct);
-      return newProduct;
+      if (data.title && data.photo && data.price && data.stock) {
+        ProductManager.#products.push(newProduct);
+        return newProduct;
+      } else {
+        throw new Error(
+          "Los campos title, photo, price, stock son obligatorias"
+        );
+      }
     } catch (error) {
       return error.message;
     }
@@ -27,14 +30,15 @@ class ProductManager {
 
   read() {
     try {
-      if (ProductManager.#products.length === 0) {
-        throw new Error("No se encontraron productos");
-      } else {
+      if(ProductManager.#products.length === 0){
+        throw new Error("No se encontro ningun producto")
+      }else{
         return ProductManager.#products;
       }
     } catch (error) {
       return error.message;
     }
+    
   }
 
   readOne(id) {
@@ -43,26 +47,28 @@ class ProductManager {
         (product) => product.id === id
       );
 
-      if (product) {
-        return product;
-      } else {
-        throw new Error("Producto no encontrado");
+      if(product){
+        return product
+      }else{
+        throw new Error("No encontrado")
       }
     } catch (error) {
-      return error.message;
+      return error.message
     }
+    
   }
 
-  destroy(id) {
+  destroy(id){
     try {
-      const productIndex = ProductManager.#products.findIndex(
+      const product = ProductManager.#products.find(
         (product) => product.id === id
       );
-
-      if (productIndex === -1) {
-        throw new Error("Producto no encontrado");
+      if (!product) {
+        throw new Error("No se encontro producto!");
       } else {
-        ProductManager.#products.splice(productIndex, 1);
+        const index = ProductManager.#products.indexOf(product);
+        ProductManager.#products.splice(index, 1);
+        
         return "Producto eliminado";
       }
     } catch (error) {
@@ -70,21 +76,26 @@ class ProductManager {
     }
   }
 
-  update(id, data) {
+  update(id,data){
     try {
-      const existingProduct = this.readOne(id);
+     const one= this.readOne(id);
+     
+     if(!one){
+       throw new Error("No se encontro producto!")
+      }else{
 
-      if (!existingProduct) {
-        throw new Error("Producto no encontrado");
-      } else {
-        // Actualizar solo los campos proporcionados en el parámetro `data`
-        existingProduct.title = data.title || existingProduct.title;
-        existingProduct.photo = data.photo || existingProduct.photo;
-        existingProduct.price = data.price || existingProduct.price;
-        existingProduct.stock = data.stock || existingProduct.stock;
+        const index = ProductManager.#products.indexOf(one);
+          one.title= data.title || one.title,
+          one.photo= data.photo || one.photo,
+          one.price= data.price || one.price,
+          one.stock= data.stock || one.stock,
 
-        return "Producto actualizado";
+          ProductManager.#products[index] = one;
+          
+
+        return "producto actualizada"
       }
+
     } catch (error) {
       return error.message;
     }
@@ -93,13 +104,6 @@ class ProductManager {
 
 const Manager = new ProductManager();
 
-console.log(
-  Manager.create({
-    title: "Manager",
-    photo: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fcodigoespagueti.com%2Fnoticias%2Ftecnologia%2Fapple-recluta-ingenieros-para-comenzar-a-trabajar-en-tecnologia-6g%2F&psig=AOvVaw3RiAqygAhd3D_C_DGldjOs&ust=1708459539934000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCIi7mfOZuIQDFQAAAAAdAAAAABAE",
-    price: 30,
-    stock: 10,
-  })
-);
+console.log(Manager.create({ photo: "https://picsum.photos/200", price: 100, stock: 10 })); 
 
 console.log(Manager.read());

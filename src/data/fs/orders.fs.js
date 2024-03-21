@@ -36,7 +36,7 @@ class OrdersManager {
         this.path,
         JSON.stringify(OrdersManager.#orders, null, 2)
       );
-      return "Nueva Orden Creada";
+      return "orden creado";
     } catch (error) {
       return error.message;
     }
@@ -45,7 +45,7 @@ class OrdersManager {
   read() {
     try {
       if (OrdersManager.#orders.length === 0) {
-        throw new Error("No se encontro nada");
+        throw new Error("No se encontraron ordenes de compra!");
       } else {
         return OrdersManager.#orders;
       }
@@ -58,7 +58,7 @@ class OrdersManager {
     try {
       const order = OrdersManager.#orders.filter((orders) => orders.uid === uid);
       if (!order) {
-        throw new Error("No se encontro ninguna orden del usuario");
+        throw new Error("No se encontro orden del usuario!");
       } else {
         return order;
       }
@@ -71,7 +71,7 @@ class OrdersManager {
     try {
       const order = OrdersManager.#orders.find((order) => order.id === oid);
       if (!order) {
-        throw new Error("No hay ninguna orden");
+        throw new Error("No se encontro orden!");
       } else {
         const index = OrdersManager.#orders.indexOf(order);
         OrdersManager.#orders.splice(index, 1);
@@ -79,7 +79,7 @@ class OrdersManager {
           this.path,
           JSON.stringify(OrdersManager.#orders, null, 2)
         );
-        return "Orden eliminada";
+        return "Orden eliminado";
       }
     } catch (error) {
       return error.message;
@@ -90,7 +90,7 @@ class OrdersManager {
     try {
       const one = OrdersManager.#orders.find((order) => order.id === oid)
       if(!one){
-        throw new Error("No hay ninguna orden")
+        throw new Error("No se encontro orden!")
       }else{
 
         one.quantity = quantity;

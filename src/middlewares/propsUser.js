@@ -1,5 +1,4 @@
-import propsUserUtils from "../utils/UserProps.js";
-
+import propsUserUtils from "../utils/propsUser.utils.js";
 
 function propsUser(req, res, next) {
   try {
@@ -8,6 +7,7 @@ function propsUser(req, res, next) {
   } catch (error) {
     return next(error)
   }
-}
+  }
+  
 
-export default propsUser;
+  export default propsUser;

@@ -1,5 +1,4 @@
-import propsProductUtils from "../utils/ProductProps.js";
-
+import propsProductUtils from "../utils/propsProducts.utils.js";
 
 function propsProduct(req, res, next) {
     try {

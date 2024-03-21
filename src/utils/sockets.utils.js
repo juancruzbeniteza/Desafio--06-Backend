@@ -1,7 +1,8 @@
 import {socketServer} from "../../server.js"
+//import ManagerProduct from "../data/fs/products.fs.js"
 import { ManagerProduct, ManagerUser } from "../data/mongo/manager.mongo.js";
-import propsProductUtils from "./ProductProps.js";
-import propsUserUtils from "./UserProps.js";
+import propsProductUtils from "./propsProducts.utils.js";
+import propsUserUtils from "./propsUser.utils.js";
 
 export default (socket) => {
     
@@ -19,7 +20,7 @@ export default (socket) => {
     readProductsAndEmit(socket);
 
 
-    socket.on("Nuevo Producto", async (data) => { 
+    socket.on("new product", async (data) => { 
       try {
         propsProductUtils(data);
         await ManagerProduct.create(data);
@@ -30,7 +31,7 @@ export default (socket) => {
     }); 
 
 
-    socket.on("Nuevo usuario", async (data) => {
+    socket.on("new User", async (data) => {
       try {
         propsUserUtils(data);
         await ManagerUser.create(data);
@@ -40,3 +41,4 @@ export default (socket) => {
     });
   } 
 
+ 

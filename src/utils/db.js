@@ -2,8 +2,8 @@ import { connect } from "mongoose"
 
 const dbConnection = async () => {
  try {
-   await connect(process.env.DB_LINK)
-   console.log("Mongo database connected");
+   await connect(process.env.LINK_MONGO)
+   console.log("database connected");
  } catch (error) {
    console.log(error);
  } 

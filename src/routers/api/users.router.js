@@ -1,138 +1,112 @@
-import { Router } from "express"
+import CustomRouter from "../CustomRouter.js";
 //import ManagerUser  from "../../data/fs/user.fs.js"
 import {ManagerUser}  from "../../data/mongo/manager.mongo.js"
-import propsUser from "../../middlewares/UserProps.js";
-const usersRouter = Router()
+import propsUser from "../../middlewares/propsUser.js";
 
-usersRouter.post("/", propsUser, async (req, res, next) => {
-    try {
-      const data = req.body;
-      const response = await ManagerUser.create(data);
-      
-      return res.json({
-        statusCode: 201,
-        response,
-      });
-      
-    } catch (error) {
-      return next(error);
-    }
-  });
-
-  usersRouter.get ('/', async (req,res, next)=>{
-    try {
-        const sortAndPaginate = {
-            sort: {email: 1},
-            page: parseInt(req.query.page) || 1,
-            limit: parseInt(req.query.limit) || 10
-        }
-
-        const filter = {}
-        if(req.query.name){
-            filter.name = req.query.name
-        }
-
-        if (req.query.email === "desc") {
-            sortAndPaginate.sort.email = -1;
-        }
-
-        const users = await ManagerUser.read({filter,sortAndPaginate})
-        if(users){
-            return res.json({
-                statusCode: 200,
-                response: users
-            })
-        }else{
-            return res.json({
-                statusCode: 404,
-                message: "No encontrado"
-            })
-        }
+class UsersRouter extends CustomRouter {
+    init() {
+        this.post("/", ["PUBLIC"], propsUser, async (req, res, next) => {
+            try {
+              const data = req.body;
+              const response = await ManagerUser.create(data);
+              
+                return res.success201(response);
+              
+            } catch (error) {
+                return next(error);
+            }
+          });
         
-    } catch (error) {
-        return next(error);
-    }
-    
-})
-
-usersRouter.get("/:email", async (req, res, next) => {
-    try {
-      const { email } = req.params;
-      const filter = { email: email };
-      const all = await ManagerUser.readByEmail(filter);
-      return res.json({
-        statusCode: 200,
-        response: all,
-      });
-    } catch (error) {
-      return next(error);
-    }
-  });
-
-usersRouter.get ('/:uid', async (req,res, next)=>{
-    try {
-        const {uid} = req.params
-        const user =await ManagerUser.readOne(uid)
-        if(user){
-            return res.json({
-                statusCode: 200,
-                response: user
-            })
-        }else{
-            return res.json({
-                statusCode: 404,
-                message: "No encontrado"
-            })
-        }
+          this.get ('/', ["ADMIN", "PREM"], async (req,res, next)=>{
+            try {
+                const sortAndPaginate = {
+                    sort: {email: 1},
+                    page: parseInt(req.query.page) || 1,
+                    limit: parseInt(req.query.limit) || 10
+                }
         
-    } catch (error) {
-        return next(error);
-    }
-    
-})
-
-usersRouter.put('/:uid', async (req,res, next)=>{
-    try {
-        const {uid} = req.params
-        const data = req.body;
-        const user = await ManagerUser.update(uid,data)
-        if(user){
-            return res.json({
-                statusCode: 200,
-                response: user
-            })
-        }else{
-            return res.json({
-                statusCode: 404,
-                message: "No encontrado"
-            })
-        }
+                const filter = {}
+                if(req.query.name){
+                    filter.name = req.query.name
+                }
         
-    } catch (error) {
-        return next(error);
-    }
-})
-
-usersRouter.delete('/:uid', async (req,res, next)=>{
-    try {
-        const {uid} = req.params
-        const user = await ManagerUser.destroy(uid)
-        if(user){
-            return res.json({
-                statusCode: 200,
-                response: user
-            })
-        }else{
-            return res.json({
-                statusCode: 404,
-                message: "No encontrado"
-            })
-        }
+                if (req.query.email === "desc") {
+                    sortAndPaginate.sort.email = -1;
+                }
         
-    } catch (error) {
-        return next(error);
+                const users = await ManagerUser.read({filter,sortAndPaginate})
+                if(users){
+                    return res.success200(users)
+                }else{
+                    return res.error404()
+                }
+                
+            } catch (error) {
+                return next(error);
+            }
+            
+        })
+        
+        this.get("/:email", ["PUBLIC"], async (req, res, next) => {
+            try {
+              const { email } = req.params;
+              const filter = { email: email };
+              const all = await ManagerUser.readByEmail(filter);
+              return res.success200(all)
+            } catch (error) {
+              return next(error);
+            }
+          });
+        
+        this.get ('/:uid', ["USER","ADMIN", "PREM"], async (req,res, next)=>{
+            try {
+                const {uid} = req.params
+                const user =await ManagerUser.readOne(uid)
+                if(user){
+                    return res.success200(user)
+                }else{
+                    return res.error404()
+                }
+                
+            } catch (error) {
+                return next(error);
+            }
+            
+        })
+        
+        this.put('/:uid', ["USER","ADMIN", "PREM"], async (req,res, next)=>{
+            try {
+                const {uid} = req.params
+                const data = req.body;
+                const user = await ManagerUser.update(uid,data)
+                if(user){
+                    return res.success200(user)
+                }else{
+                    return res.error404()
+                }
+                
+            } catch (error) {
+                return next(error);
+            }
+        })
+        
+        this.delete('/:uid', ["USER","ADMIN", "PREM"], async (req,res, next)=>{
+            try {
+                const {uid} = req.params
+                const user = await ManagerUser.destroy(uid)
+                if(user){
+                    return res.success200(user)
+                }else{
+                    return res.error404()
+                }
+                
+            } catch (error) {
+                return next(error);
+            }
+        })
+        
     }
-})
+}
 
 
-export default usersRouter
+export default UsersRouter

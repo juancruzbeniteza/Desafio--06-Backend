@@ -38,7 +38,7 @@ class ProductManager {
         this.path,
         JSON.stringify(ProductManager.#products, null, 2)
       );
-      return "Nuevo producto creado";
+      return "Producto creado";
     } catch (error) {
       return error.message;
     }
@@ -47,7 +47,7 @@ class ProductManager {
   read() {
     try {
       if (ProductManager.#products.length === 0) {
-        throw new Error("No se encontraro ningun producto");
+        throw new Error("No se encontraron productos!");
       } else {
         return ProductManager.#products;
       }
@@ -62,7 +62,7 @@ class ProductManager {
         (product) => product.id === id
       );
       if (!product) {
-        throw new Error("No se encontro ningun producto");
+        throw new Error("No se encontro producto!");
       } else {
         return product;
       }
@@ -77,7 +77,7 @@ class ProductManager {
         (product) => product.id === id
       );
       if (!product) {
-        throw new Error("No se encontro ningun producto con ese ID");
+        throw new Error("No se encontro producto!");
       } else {
         const index = ProductManager.#products.indexOf(product);
         ProductManager.#products.splice(index, 1);
@@ -97,7 +97,7 @@ class ProductManager {
      const one= this.readOne(id);
 
       if(!one){
-        throw new Error("No se encontro ningun producto")
+        throw new Error("No se encontro producto!")
       }else{
           one.title= data.title || one.title,
           one.photo= data.photo || one.photo,
@@ -109,7 +109,7 @@ class ProductManager {
           JSON.stringify(ProductManager.#products, null, 2)
         );
 
-        return "Producto Actualizado"
+        return "producto actualizada"
       }
 
     } catch (error) {

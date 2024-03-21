@@ -1,23 +1,25 @@
-const socket= io();
 
-document.querySelector("#newProduct").addEventListener("click", (event) => {
-    event.preventDefault();
-    const title = document.querySelector("#title").value;
-    const photo = document.querySelector("#photo").value;
-    const price = document.querySelector("#price").value;
-    const stock = document.querySelector("#stock").value;
-    const data = {};
-    title && (data.title = title);
-    photo && (data.photo = photo);
-    price && (data.price = price);
-    stock && (data.stock = stock);
-    
-    socket.emit("new product", data);
+document.querySelector("#newProduct").addEventListener("click", async() => {
 
-    alert("Producto Creado");
-    title.value = "";
-    photo.value = "";
-    price.value = "";
-    stock.value = "";
-    
-  });
+  try {
+    const data = {
+      title: document.querySelector("#title").value,
+      photo: document.querySelector("#photo").value,
+      price: document.querySelector("#price").value,
+      stock: document.querySelector("#stock").value,
+    };
+
+    const opts = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    };
+    let response = await fetch("/api/products/", opts);
+    response = await response.json();
+    response.statusCode === 201
+      ?  alert("Creado exitosamente")
+      : alert("ERROR: " + response.message);
+  } catch (error) {
+    alert(error.message);
+  }
+});

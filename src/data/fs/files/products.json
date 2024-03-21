@@ -1,6 +1,6 @@
 [
   {
-    "id": "1",
+    "id":"65fb62e32885007afc9a1b9b",
     "title": "Smartphone",
     "description": "High-end smartphone with advanced features.",
     "price": 799.99,
@@ -9,7 +9,7 @@
     "stock": 50
   },
   {
-    "id": "2",
+    "id":"65fb62e32885007afc9a1b9c",
     "title": "Laptop",
     "description": "Powerful laptop with a sleek design.",
     "price": 1299.99,
@@ -18,7 +18,7 @@
     "stock": 30
   },
   {
-    "id": "3",
+    "id":"65fb62e32885007afc9a1b9d",
     "title": "Smart TV",
     "description": "Ultra HD smart television with smart features.",
     "price": 899.99,
@@ -27,7 +27,7 @@
     "stock": 20
   },
   {
-    "id": "4",
+    "id":"65fb62e32885007afc9a1b9e",
     "title": "Digital Camera",
     "description": "Professional digital camera with high-resolution capabilities.",
     "price": 499.99,
@@ -36,7 +36,7 @@
     "stock": 15
   },
   {
-    "id": "5",
+    "id":"65fb62e32885007afc9a1b9f",
     "title": "Wireless Earbuds",
     "description": "Premium wireless earbuds with noise-cancellation technology.",
     "price": 149.99,

@@ -1,23 +1,24 @@
-import bcrypt from 'bcrypt';
+const selector = document.querySelector("#register");
+selector.addEventListener("click", async () => {
+  try {
+    const data = {
+      name: document.querySelector("#name").value,
+      photo: document.querySelector("#photo").value,
+      email: document.querySelector("#email").value,
+      password: document.querySelector("#password").value,
+    };
 
-document.querySelector("#newUser").addEventListener("click", async (event) => {
-  event.preventDefault();
-  const name = document.querySelector("#name").value;
-  const photo = document.querySelector("#photo").value;
-  const email = document.querySelector("#email").value;
-  const password = document.querySelector("#password").value; // Add this line
-
-  const data = {};
-  name && (data.name = name);
-  photo && (data.photo = photo);
-  email && (data.email = email);
-  password && (data.password = await bcrypt.hash(password, 10)); // Hash the password
-
-  socket.emit("Nuevo Usuario", data);
-
-  alert("Usuario Creado");
-  name.value = "";
-  photo.value = "";
-  email.value = "";
-  password.value = ""; // Clear the password field
+    const opts = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    };
+    let response = await fetch("/api/sessions/register", opts);
+    response = await response.json();
+    response.statusCode === 201
+      ? location.replace("/sessions/login")
+      : alert("ERROR: " + response.response);
+  } catch (error) {
+    alert(error.message);
+  }
 });
