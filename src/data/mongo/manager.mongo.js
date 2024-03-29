@@ -1,6 +1,3 @@
-import Product from "./models/products.models.js";
-import User from "./models/users.models.js";
-import Order from "./models/orders.models.js";
 import { Types } from "mongoose";
 /* import ManagerOrders from './../fs/orders.fs'; */
 
@@ -117,7 +114,4 @@ class MongoManager {
   
 }
 
-const ManagerUser = new MongoManager(User);
-const ManagerOrders = new MongoManager(Order);
-const ManagerProduct = new MongoManager(Product);
-export {ManagerProduct, ManagerUser, ManagerOrders} 
+export default MongoManager;

@@ -1,5 +1,5 @@
 import CustomRouter from "../CustomRouter.js";
-import {ManagerProduct}  from '../../data/mongo/manager.mongo.js'
+import products from "../../data/mongo/products.mongo.js";
 import ProductRouter from './products.view.js';
 import SessionsRouter from './sessions.view.js';
 import OrdersRouter from './orders.view.js';
@@ -30,11 +30,11 @@ class ViewsRouter extends CustomRouter{
                  if (req.query.price === "desc") {
                      sortAndPaginate.sort.price = -1;
                  } 
-                 const readProducts = await ManagerProduct.read({filter,sortAndPaginate})
-                 let products = readProducts.docs.map(doc => doc.toObject())
+                 const readProducts = await products.read({filter,sortAndPaginate})
+                 let allProducts = readProducts.docs.map(doc => doc.toObject())
          
                  return res.render("index",{
-                    products: products,
+                    products: allProducts,
                     next: readProducts.nextPage,
                     prev: readProducts.prevPage,
                     filter: req.query.title,})
@@ -59,10 +59,10 @@ class ViewsRouter extends CustomRouter{
                 if (req.query.price === "desc") {
                     sortAndPaginate.sort.price = -1;
                 } 
-                const readProducts = await ManagerProduct.read({filter,sortAndPaginate})
-                let products = readProducts.docs.map(doc => doc.toObject())
+                const readProducts = await products.read({filter,sortAndPaginate})
+                let allProducts = readProducts.docs.map(doc => doc.toObject())
         
-                return res.render("real",{products: products})
+                return res.render("real",{products: allProducts})
             }catch(error){
                 next(error)
             }

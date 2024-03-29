@@ -1,5 +1,6 @@
 import CustomRouter from "../CustomRouter.js";
-import { ManagerOrders, ManagerUser } from "../../data/mongo/manager.mongo.js";
+import orders from "../../data/mongo/orders.mongo.js";
+import users from "../../data/mongo/users.mongo.js";
 import passCb from "../../middlewares/passCb.js";
 /* import User from "../../data/mongo/models/users.models.js"; */
 
@@ -12,15 +13,15 @@ class OrdersRouter extends CustomRouter {
               page: parseInt(req.query.page) || 1,
               limit: parseInt(req.query.limit) || 10
           }
-          const user = await ManagerUser.readByEmail({email:req.session.email});
+          const user = await users.readByEmail({email:req.session.email});
           const filter = {
               uid: user._id,
             };
-            const all = await ManagerOrders.read({ filter, sortAndPaginate });
-            let orders = all.docs.map(doc => doc.toObject())
+            const all = await orders.read({ filter, sortAndPaginate });
+            let allOrders = all.docs.map(doc => doc.toObject())
       
           return res.render("orders", { 
-              orders:orders,
+              orders:allOrders,
               next: all.nextPage,
               prev: all.prevPage, 
           });

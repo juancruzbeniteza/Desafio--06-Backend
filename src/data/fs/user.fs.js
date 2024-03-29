@@ -23,22 +23,15 @@ class UserManager{
 
     create(data){
         try {
-          
-          const newUser = {
-            id: crypto.randomBytes(12).toString("hex"),
-            name: data.name,
-            photo: data.photo,
-            email: data.email,
-          };
-
-          UserManager.#user.push(newUser);
+         
+          UserManager.#user.push(data);
           fs.writeFileSync(
             this.path,
             JSON.stringify(UserManager.#user, null, 2)
           );
-          return "Usuario creado";
+          return data
         } catch (error) {
-          return error.message;
+          throw error;
         }
     }
 
@@ -57,7 +50,7 @@ class UserManager{
     readOne(id){
       try {
         const user =UserManager.#user.find(
-          (user) => user.id === id
+          (user) => user._id === id
         );
         if (!user) {
           throw new Error("No se encontro usuario!");
@@ -65,14 +58,14 @@ class UserManager{
           return user;
         }
       } catch (error) {
-        return error.message;
+        throw error;
       }
     }
 
     destroy(id){
       try {
         const user = UserManager.#user.find(
-          (product) => product.id === id
+          (product) => product._id === id
         );
         if (!user) {
           throw new Error("No se encontro usuario!");
@@ -83,10 +76,10 @@ class UserManager{
             this.path,
             JSON.stringify(UserManager.#user, null, 2)
           );
-          return "Usuario eliminado";
+          return user
         }
       } catch (error) {
-        return error.message;
+        throw error
       }
     }
 
@@ -106,13 +99,29 @@ class UserManager{
             JSON.stringify(UserManager.#user, null, 2)
           );
   
-          return "usuario actualizada"
+          return one
         }
   
       } catch (error) {
-        return error.message;
+        throw error
       }
     }
+
+    readByEmail(email) {
+      try {
+        const user =UserManager.#user.find(
+          (user) => user.email === email
+        );
+        if (!user) {
+          throw new Error("No se encontro usuario!");
+        } else {
+          return user;
+        }
+      } catch (error) {
+        throw error;
+      }
+    }
+  
   }
 
 

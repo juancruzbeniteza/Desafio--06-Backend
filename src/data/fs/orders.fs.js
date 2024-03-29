@@ -22,23 +22,15 @@ class OrdersManager {
   create(data) {
     try {
       
-      const newOrder = {
-        id: crypto.randomBytes(12).toString("hex"),
-        pid: data.pid,
-        uid: data.uid,
-        quantity: data.quantity,
-        state: data.state,
-      };
-
-      OrdersManager.#orders.push(newOrder);
+      OrdersManager.#orders.push(data);
 
       fs.writeFileSync(
         this.path,
         JSON.stringify(OrdersManager.#orders, null, 2)
       );
-      return "orden creado";
+      return data._id;
     } catch (error) {
-      return error.message;
+      throw error;
     }
   }
 
@@ -63,13 +55,13 @@ class OrdersManager {
         return order;
       }
     } catch (error) {
-      return error.message;
+      throw error;
     }
   }
 
   destroy(oid) {
     try {
-      const order = OrdersManager.#orders.find((order) => order.id === oid);
+      const order = OrdersManager.#orders.find((order) => order._id === oid);
       if (!order) {
         throw new Error("No se encontro orden!");
       } else {
@@ -79,10 +71,10 @@ class OrdersManager {
           this.path,
           JSON.stringify(OrdersManager.#orders, null, 2)
         );
-        return "Orden eliminado";
+        return order;
       }
     } catch (error) {
-      return error.message;
+      throw error;
     }
   }
 
@@ -99,12 +91,12 @@ class OrdersManager {
           this.path,
           JSON.stringify(OrdersManager.#orders, null, 2)
         );
-        return "Orden actualizada"
+        return one
       }
       
 
     } catch (error) {
-      return error.message;
+      throw error;
     }
   }
 }

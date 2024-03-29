@@ -8,7 +8,7 @@ class ProductManager {
   create(data) {
     try {
       const newProduct = {
-        id: crypto.randomBytes(12).toString("hex"),
+        _id: crypto.randomBytes(12).toString("hex"),
         title: data.title,
         photo: data.photo,
         price: data.price,
@@ -17,28 +17,40 @@ class ProductManager {
 
       if (data.title && data.photo && data.price && data.stock) {
         ProductManager.#products.push(newProduct);
-        return newProduct;
+        return newProduct._id;
       } else {
         throw new Error(
           "Los campos title, photo, price, stock son obligatorias"
         );
       }
     } catch (error) {
-      return error.message;
+      throw error;
     }
   }
 
-  read() {
-    try {
-      if(ProductManager.#products.length === 0){
-        throw new Error("No se encontro ningun producto")
-      }else{
-        return ProductManager.#products;
-      }
-    } catch (error) {
-      return error.message;
+  read({ filter, sortAndPaginate }) {try {
+    let filteredProducts = ProductManager.#products;
+    if (filter) {
+        filteredProducts = filteredProducts.filter(product => product.name.toLowerCase().includes(filter.name.toLowerCase()));
     }
-    
+
+    if (sortAndPaginate) {
+        const { page = 1, limit = 10, sort } = sortAndPaginate;
+        const startIndex = (page - 1) * limit;
+        const endIndex = page * limit;
+        if (sort) {
+            filteredProducts = filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+        }
+        filteredProducts = filteredProducts.slice(startIndex, endIndex);
+    }
+
+    if (filteredProducts.length === 0) {
+        throw new Error("No se encontraron productos!");
+    }
+    return filteredProducts;
+} catch (error) {
+    throw error;
+}
   }
 
   readOne(id) {
@@ -53,7 +65,7 @@ class ProductManager {
         throw new Error("No encontrado")
       }
     } catch (error) {
-      return error.message
+      throw error;
     }
     
   }
@@ -69,10 +81,10 @@ class ProductManager {
         const index = ProductManager.#products.indexOf(product);
         ProductManager.#products.splice(index, 1);
         
-        return "Producto eliminado";
+        return product
       }
     } catch (error) {
-      return error.message;
+      throw error;
     }
   }
 
@@ -93,17 +105,14 @@ class ProductManager {
           ProductManager.#products[index] = one;
           
 
-        return "producto actualizada"
+        return one
       }
 
     } catch (error) {
-      return error.message;
+      throw error
     }
   }
 }
 
-const Manager = new ProductManager();
-
-console.log(Manager.create({ photo: "https://picsum.photos/200", price: 100, stock: 10 })); 
-
-console.log(Manager.read());
+const ManagerProduct = new ProductManager();
+export default ManagerProduct;

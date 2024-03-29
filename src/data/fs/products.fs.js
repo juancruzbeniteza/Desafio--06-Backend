@@ -1,5 +1,4 @@
 import fs from "fs";
-import crypto from "crypto";
 
 class ProductManager {
   static #products = [];
@@ -23,43 +22,48 @@ class ProductManager {
 
   create(data) {
     try {
-      
-      const newProduct = {
-        id: crypto.randomBytes(12).toString("hex"),
-        title: data.title,
-        photo: data.photo,
-        price: data.price,
-        stock: data.stock,
-      };
-
-      ProductManager.#products.push(newProduct);
+      ProductManager.#products.push(data);
 
       fs.writeFileSync(
         this.path,
         JSON.stringify(ProductManager.#products, null, 2)
       );
-      return "Producto creado";
+      return data._id;
     } catch (error) {
-      return error.message;
+      throw error;
     }
   }
 
-  read() {
+  read({ filter, sortAndPaginate }) {
     try {
-      if (ProductManager.#products.length === 0) {
-        throw new Error("No se encontraron productos!");
-      } else {
-        return ProductManager.#products;
-      }
+        let filteredProducts = ProductManager.#products;
+        if (filter) {
+            filteredProducts = filteredProducts.filter(product => product.name.toLowerCase().includes(filter.name.toLowerCase()));
+        }
+
+        if (sortAndPaginate) {
+            const { page = 1, limit = 10, sort } = sortAndPaginate;
+            const startIndex = (page - 1) * limit;
+            const endIndex = page * limit;
+            if (sort) {
+                filteredProducts = filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+            }
+            filteredProducts = filteredProducts.slice(startIndex, endIndex);
+        }
+
+        if (filteredProducts.length === 0) {
+            throw new Error("No se encontraron productos!");
+        }
+        return filteredProducts;
     } catch (error) {
-      return error.message;
+        throw error;
     }
-  }
+}
 
   readOne(id) {
     try {
       const product = ProductManager.#products.find(
-        (product) => product.id === id
+        (product) => product._id === id
       );
       if (!product) {
         throw new Error("No se encontro producto!");
@@ -67,14 +71,14 @@ class ProductManager {
         return product;
       }
     } catch (error) {
-      return error.message;
+      throw error
     }
   }
 
   destroy(id){
     try {
       const product = ProductManager.#products.find(
-        (product) => product.id === id
+        (product) => product._id === id
       );
       if (!product) {
         throw new Error("No se encontro producto!");
@@ -85,10 +89,10 @@ class ProductManager {
           this.path,
           JSON.stringify(ProductManager.#products, null, 2)
         );
-        return "Producto eliminado";
+        return product
       }
     } catch (error) {
-      return error.message;
+      throw error
     }
   }
 
@@ -109,11 +113,11 @@ class ProductManager {
           JSON.stringify(ProductManager.#products, null, 2)
         );
 
-        return "producto actualizada"
+        return one
       }
 
     } catch (error) {
-      return error.message;
+      throw error
     }
   }
 }
