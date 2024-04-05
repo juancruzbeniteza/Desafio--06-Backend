@@ -15,30 +15,7 @@ import {
 
 class SessionsRouter extends CustomRouter {
   init() {
-    //google
-    /* this.post(
-        "/google",
-        passport.authenticate("google", { scope: ["email", "profile"] }));
-
-      //google-callback
-      this.get(
-        "/google/cb",
-        passport.authenticate("google", {
-          session: false,
-          failureRedirect: "/api/sessions/badauth",
-        }),
-        async (req, res, next) => {
-          try {
-            return res.success200({
-              message: "Logged in with google!",
-              session: req.session,
-            })
-              
-          } catch (error) {
-            return next(error);
-          }
-        }
-      ); */
+    
 
     //register
     this.post("/register", ["PUBLIC"], has8char, passCb("register"), register);

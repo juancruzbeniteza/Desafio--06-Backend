@@ -11,11 +11,11 @@ async function sendEmail(data) {
       },
     });
     await transport.sendMail({
-      from: `E-COMMERCE <${process.env.GOOGLE_EMAIL}>`,
+      from: `Ecommerce Tecno  <${process.env.GOOGLE_EMAIL}>`,
       to: data.email,
       subject: `USER ${data.name.toUpperCase()} REGISTERED!`,
       html: `
-        <h1>USER REGISTERED!<h1>
+        <h1>USER REGISTERED SUCCESFULLY<h1>
       `,
     });
   } catch (error) {
