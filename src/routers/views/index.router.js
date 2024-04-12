@@ -19,7 +19,7 @@ class ViewsRouter extends CustomRouter{
                 const sortAndPaginate = {
                      sort: {price: 1},
                      page: parseInt(req.query.page) || 1,
-                     limit: parseInt(req.query.limit) || 1
+                     limit: parseInt(req.query.limit) || 10
                  }
          
                  const filter = {}

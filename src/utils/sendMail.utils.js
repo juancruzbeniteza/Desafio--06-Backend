@@ -1,4 +1,5 @@
 import { createTransport } from "nodemailer";
+import env from './env.utils.js'
 
 async function sendEmail(data) {
   try {

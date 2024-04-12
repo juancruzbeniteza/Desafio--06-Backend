@@ -3,7 +3,7 @@ import args from "./args.utils.js";
 
 const { env } = args;
 const path =
-  env === "prod" ? "./.env.prod" : env === "dev" ? "./.env.dev" : "./.env.test";
+env === "dev" ? "./.env.dev" : env === "prod" ? "./.env.prod" : "./.env.test";
 config({ path });
 
 export default {
@@ -11,5 +11,6 @@ export default {
   LINK_MONGO: process.env.LINK_MONGO,
   SECRET: process.env.SECRET,
   SECRET_KEY: process.env.SECRET_KEY,
- 
+  GOOGLE_EMAIL: process.env.GOOGLE_EMAIL,
+  GOOGLE_PASS: process.env.GOOGLE_PASS,
 };

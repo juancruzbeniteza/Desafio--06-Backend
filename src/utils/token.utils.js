@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import env from './env.utils.js'
 
 function createToken(data) {
   const token = jwt.sign(
