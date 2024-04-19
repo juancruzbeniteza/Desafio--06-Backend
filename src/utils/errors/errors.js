@@ -1,10 +1,12 @@
 const errors = {
-    error: { message: "Error", statusCode: 400 },
-    token: { message: "Invalid Token!", statusCode: 405 },
-    auth: { message: "Invalid Credentials", statusCode: 401 },
-    forbidden: { message: "Forbidden", statusCode: 403 },
-    notFound: { message: "Not Found", statusCode: 404 },
-    fatal: { message: "Fatal", statusCode: 500 },
-  };
-  
-  export default errors;
+  message: (message) => ({ message, statusCode: 400 }),
+  passCb: (message, statusCode) => ({ message, statusCode }),
+  error: { message: "Error", statusCode: 405 },
+  existPass:{ message: "User already exists", statusCode:401 },
+  auth: { message: "Invalid credentials", statusCode: 406 },
+  forbidden: { message: "Forbidden", statusCode: 403 },
+  notFound: { message: "Not Found docs", statusCode: 404 },
+  fatal: { message: "Fatal", statusCode: 500 },
+};
+
+export default errors;

@@ -1,13 +1,14 @@
 import argsUtil from "../utils/args.utils.js";
 import dbConnection from "../utils/db.js"
 import "dotenv/config"
+import logger from "../utils/logger/index.js";
 
 const environment = argsUtil.env;
 let dao={}
 
 switch (environment) {
     case "test":
-      console.log("FS  CONNECTED");
+      logger.INFO("FS  CONNECTED");
       const { default: ordersFs } = await import("./fs/orders.fs.js")
       const { default: usersFs } = await import("./fs/user.fs.js")
       const { default: productsFs } = await import("./fs/products.fs.js")
@@ -16,7 +17,7 @@ switch (environment) {
 
     case "dev":
       dbConnection()
-        .then(() => console.log(" DEV MONGO CONNECTED"))
+        .then(() => logger.INFO(" DEV MONGO CONNECTED"))
           const { default: productsMongoDev } = await import("./mongo/products.mongo.js")
           const { default: usersMongoDev } = await import("./mongo/users.mongo.js")
           const { default: ordersMongoDev } = await import("./mongo/orders.mongo.js")
@@ -25,7 +26,7 @@ switch (environment) {
 
       case "prod":
         dbConnection()
-        .then(() => console.log("MONGO CONNECTED"))
+        .then(() => logger.INFO("MONGO CONNECTED"))
           const { default: productsMongo } = await import("./mongo/products.mongo.js")
           const { default: usersMongo } = await import("./mongo/users.mongo.js")
           const { default: ordersMongo } = await import("./mongo/orders.mongo.js")

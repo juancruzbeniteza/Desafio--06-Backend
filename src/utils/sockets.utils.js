@@ -3,17 +3,18 @@ import products from "../data/mongo/products.mongo.js"
 import users from "../data/mongo/users.mongo.js"
 import propsProductUtils from "./propsProducts.utils.js";
 import propsUserUtils from "./propsUser.utils.js";
+import logger from "./logger/index.js";
 
 export default (socket) => {
     
-    console.log("client " + socket.id + " connected");
+    logger.INFO ("client " + socket.id + " connected");
 
      async function readProductsAndEmit(socket) {
       try {
           const products = await products.read({});
           socket.emit("products", products);
       } catch (error) {
-          console.log(error);
+          logger.WARN(error.message);
       }
     }
     
@@ -26,7 +27,7 @@ export default (socket) => {
         await products.create(data);
         readProductsAndEmit(socket)
       } catch (error) {
-        console.log(error);
+        logger.WARN(error.message);
       }
     }); 
 
@@ -36,7 +37,7 @@ export default (socket) => {
         propsUserUtils(data);
         await users.create(data);
       } catch (error) {
-        console.log(error);
+        logger.WARN(error.message);
       }
     });
   } 

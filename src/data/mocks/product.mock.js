@@ -1,5 +1,6 @@
 import {faker} from "@faker-js/faker"
 import repository from './../../repositories/products.rep';
+import logger from "../../utils/logger/index.js"
 
 
 function productMock() {
@@ -16,7 +17,7 @@ async function createProducts() {
             await repository.create(productMock());
         }
     } catch (error) {
-        console.log(error);
+        logger.WARN(error.message);
     }
 }
 

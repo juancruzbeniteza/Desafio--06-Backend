@@ -16,12 +16,14 @@ import expressSession from "express-session";
 import compression from 'express-compression';
 
 import cors from "cors"
+import winston from './src/middlewares/winston.js';
+import logger from './src/utils/logger/index.js';
 
 //servers
 const server=express()
 const PORT=env.PORT ||8080
 const ready = ()=>{
-    console.log(`Server ready on port ${PORT}`)
+    logger.INFO(`Server ready on port ${PORT}`)
 }
 
 const httpServer=createServer(server)   
@@ -89,6 +91,7 @@ server.use(express.json())
 server.use(express.urlencoded({extended:true}))
 server.use(express.static(__dirname+"/public"))
 server.use(morgan("dev"))
+server.use(winston)
 server.use(compression({
   brotli: {enable:true, zlib:{}}
 }));
