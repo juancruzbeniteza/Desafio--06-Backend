@@ -19,6 +19,10 @@ import cors from "cors"
 import winston from './src/middlewares/winston.js';
 import logger from './src/utils/logger/index.js';
 
+import swaggerOptions from './src/utils/swagger.js';
+import swaggerJSDoc from 'swagger-jsdoc';
+import { serve, setup } from "swagger-ui-express"
+
 //servers
 const server=express()
 const PORT=env.PORT ||8080
@@ -29,7 +33,7 @@ const ready = ()=>{
 const httpServer=createServer(server)   
 const socketServer=new Server(httpServer)
 httpServer.listen(PORT,ready)
- 
+
 
 socketServer.on("connection", socketUtils)
 
@@ -80,6 +84,8 @@ const FileStore = sessionFileStore(expressSession);
   })
 ); */
 
+const specs = swaggerJSDoc(swaggerOptions);
+server.use("/api/docs", serve, setup(specs)); 
 
 server.use(cors({
     origin:true,
