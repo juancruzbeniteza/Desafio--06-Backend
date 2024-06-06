@@ -1,24 +1,24 @@
 [
   {
-    "id":"65fb62e32885007afc9a1b9b",
+    "_id":"6657807ec2ca017027937b83",
     "title": "Smartphone",
     "description": "High-end smartphone with advanced features.",
     "price": 799.99,
-    "photo": "https://www.apple.com/la/iphone-15-pro/",
+    "photo": "https://thumbs.dreamstime.com/z/iphone-xs-max-illustration-icons-mockup-vector-new-apple-smartphone-isolated-white-background-127712063.jpg?ct=jpeg",
     "code": "SP123",
     "stock": 50
   },
   {
-    "id":"65fb62e32885007afc9a1b9c",
+    "_id":"6657807ec2ca017027937b84",
     "title": "Laptop",
     "description": "Powerful laptop with a sleek design.",
     "price": 1299.99,
-    "photo": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.apple.com%2Fla%2Fnewsroom%2F2023%2F01%2Fapple-unveils-macbook-pro-featuring-m2-pro-and-m2-max%2F&psig=AOvVaw1usQ31jHrRBpL25KZ1t3m2&ust=1707338185489000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCJCmoMPIl4QDFQAAAAAdAAAAABAF",
+    "photo": "https://thumbs.dreamstime.com/z/apple-laptop-18562387.jpg?ct=jpeg",
     "code": "LP456",
     "stock": 30
   },
   {
-    "id":"65fb62e32885007afc9a1b9d",
+    "_id":"6657807ec2ca017027937b85",
     "title": "Smart TV",
     "description": "Ultra HD smart television with smart features.",
     "price": 899.99,
@@ -27,7 +27,7 @@
     "stock": 20
   },
   {
-    "id":"65fb62e32885007afc9a1b9e",
+    "_id":"6657807ec2ca017027937b86",
     "title": "Digital Camera",
     "description": "Professional digital camera with high-resolution capabilities.",
     "price": 499.99,
@@ -36,7 +36,7 @@
     "stock": 15
   },
   {
-    "id":"65fb62e32885007afc9a1b9f",
+    "_id":"6657807ec2ca017027937b87",
     "title": "Wireless Earbuds",
     "description": "Premium wireless earbuds with noise-cancellation technology.",
     "price": 149.99,
