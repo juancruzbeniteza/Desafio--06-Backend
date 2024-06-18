@@ -1,0 +1,126 @@
+openapi: 3.0.0
+info:
+  title: Auth API
+  description: Authentication endpoints for managing user registration, login, and other related operations
+  version: 1.0.0
+paths:
+  /api/sessions/register:
+    post:
+      summary: Register a new user
+      tags: ["Sessions"]
+      description: Register a new user with the provided data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: The email of the user
+                name:
+                  type: string
+                  description: The name of the user
+                verifiedCode:
+                  type: string
+                  description: The verification code for the user
+      responses:
+        '201':
+          description: Registered successfully
+        '400':
+          description: Bad request, invalid input data
+        '500':
+          description: Internal server error
+
+  /api/sessions/login:
+    post:
+      summary: Log in a user
+      tags: ["Sessions"]
+      description: Log in a user with the provided credentials
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: The email of the user
+                password:
+                  type: string
+                  description: The password of the user
+      responses:
+        '200':
+          description: Logged in successfully
+        '401':
+          description: Unauthorized, invalid credentials
+        '500':
+          description: Internal server error
+
+  /api/sessions/signout:
+    post:
+      summary: Sign out a user
+      tags: ["Sessions"]
+      description: Sign out the currently logged in user
+      responses:
+        '200':
+          description: Signed out successfully
+        '401':
+          description: Unauthorized, user not logged in
+        '500':
+          description: Internal server error
+
+  /api/sessions/badauth:
+    get:
+      summary: Bad authentication
+      tags: ["Sessions"]
+      description: Endpoint for handling bad authentication attempts
+      responses:
+        '401':
+          description: Unauthorized, bad credentials
+
+  /api/sessions/forbidden:
+    get:
+      summary: Forbidden
+      tags: ["Sessions"]
+      description: Endpoint for handling forbidden access attempts
+      responses:
+        '403':
+          description: Forbidden, access denied
+
+  /api/sessions/signoutError:
+    get:
+      summary: Signout error
+      tags: ["Sessions"]
+      description: Endpoint for handling signout errors
+      responses:
+        '400':
+          description: Bad request, already signed out
+
+  /api/sessions/verifyAccount:
+    post:
+      summary: Verify user account
+      tags: ["Sessions"]
+      description: Verify a user account with the provided verification code
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: The email of the user
+                verifiedCode:
+                  type: string
+                  description: The verification code for the user
+      responses:
+        '200':
+          description: User verified successfully
+        '400':
+          description: Invalid verification code
+        '500':
+          description: Internal server error

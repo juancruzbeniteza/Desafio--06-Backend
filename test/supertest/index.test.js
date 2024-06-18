@@ -1,128 +1,143 @@
 import "dotenv/config.js";
-
-import supertest from "supertest";
+import env from '../../src/utils/env.utils.js';
 import { expect } from "chai";
+import supertest from "supertest";
+import dao from "../../src/data/factory.js";
+const { products, users, orders } = dao;
 
-const requester = supertest(`http://localhost:${process.env.PORT}/api`);
+ const requester = supertest("http://localhost:" + env.PORT + "/api");
 
-// describe("AUTH TEST", () => {
-//     const userData = {
-//         email: "arnotomas1@gmail.com",
-//         name: "Tomás",
-//         role: 2,
-//         password: "tomas123",
-//     };
+describe("Testeando", () => {
 
-//     let token;
+  
 
-//     it("Registro de un usuario", async () => {
-//         const response = await requester.post("/sessions/register").send(userData);
-//         const { _body } = response;
+describe("Testeando sessions", async () => {
+    const user = {
+      name: "Juan",
+      email: "JuanCruz@Juan.com",
+      password: "hola1234",
+      role: 1,
+    };
+    let uid;
+    let token = {};
 
-//         expect(_body.statusCode).to.be.equals(201);
-//     });
-//     it("Inicio de sesión", async () => {
-//         const response = await requester.post("/sessions/login").send({ email: userData.email, password: userData.password });
-//         const { _body, headers } = response;
+  it("Registro de un usuario correctamente", async () => {
+      const response = await requester.post("/sessions/register").send(user);
+      const { _body} = response;
+      uid=_body.payload._id;
+      expect(_body.statusCode).to.be.equals(201);
+    }); 
 
-//         token = `${headers["set-cookie"][0]?.split("=")[0]}=${headers["set-cookie"][0].split("=")[1]}`;
+    it("Inicio de sesión correctamente", async () => {
+      const response = await requester.post("/sessions/login").send(user);
+      const { statusCode, headers } = response; 
+      token.key = headers["set-cookie"][0].split("=")[0];
+      token.value = headers["set-cookie"][0].split("=")[1];
+      
+      expect(statusCode).to.be.equals(200);
+    });
 
-//         expect(_body.statusCode).to.be.equals(200);
-//     });
-//     it("Cerrado de sesión", async () => {
-//         const response = await requester.post("/sessions/signout").set("Cookie", [token]);
-//         const { _body } = response;
+    it("Cerrado de sesión correctamente", async () => {
+      const response = await requester.post("/sessions/signout").set("Cookie", [
+        token.key + "=" + token.value,
+      ]);
+      const { statusCode } = response;
+      expect(statusCode).to.be.equals(200);
+    })
+ 
+    it("Eliminación de un usuario correctamente", async () => {
+      const response = await requester.delete("/users/" + uid)
+      const { _body } = response;
+      expect(_body.statusCode).to.be.equals(200);
+      
+    }); 
+  }); 
 
-//         expect(_body.statusCode).to.be.equals(200);
-//     });
-//     it("Eliminación de un usuario", async () => {
-//         const searchedUser = await requester.get(`/users?email=${userData.email}`).set("Cookie", [token]);
+ describe("Testeando Productos", () => {
 
-//         const [user] = searchedUser._body.response.docs
+  it("Leer todos los productos correctamente", async () => {
+    const response = await requester.get("/products");
+    const { statusCode } = response;
+    expect(statusCode).to.be.equals(200);
+  });
 
-//         const response = await requester.delete("/users/" + user._id).set("Cookie", [token]);
+    it("Leer todos los productos correctamente", async () => {
+      const response = await requester.get("/products");
+      const { statusCode } = response;
+      expect(statusCode).to.be.equals(200);
+    });
 
-//         const { _body } = response;
+    it("Leer un productos correctamente", async () => {
+      const response = await requester.get("/products/" + pid);
+      const { statusCode } = response;
+      expect(statusCode).to.be.equals(200);
+    });
 
-//         expect(_body.statusCode).to.be.equals(200);
-//     });
-// });
+    it("Actualizacion de un producto correctamente", async () => {
+      const response = await requester.put("/products").send(prod_update);
+      const { statusCode } = response;
+      expect(statusCode).to.be.equals(200);
+    });
 
-describe("PRODUCTS TEST", () => {
-    const userData = {
-        email: "arnotomas1@gmail.com",
-        password: "tomas123",
+    it("Eliminación de un producto correctamente", async () => {
+      const response = await requester.delete("/products/" + pid)
+      const { statusCode } = response;
+      expect(statusCode).to.be.equals(200);
+    }); 
+  })
+ 
+
+  describe("Testeando Orders", () => {
+  
+    const order = {
+      pid: "65fb62e32885007afc9a1b9d",
+      uid: "65fb60dd2885007afc9a1b93",
+      quantity: 30,
+      state: 2
     };
 
-    const productData = {
-        title: "Heladera Samsung",
-        price: 100000,
-        stock: 20
-    };
+    const order_update={
+      quantity: 50,
+    }
 
-    let token;
+   it("Registro de una orden correctamente", async () => {
+    const response = await requester.post("/orders").send(prod);
+    const { _body, statusCode } = response;
+    pid=_body.payload._id;
+    expect(statusCode).to.be.equals(200);
+  });
 
-    it("Inicio de sesión", async () => {
-        const response = await requester.post("/sessions/login").send({ email: userData.email, password: userData.password });
-        const { _body, headers } = response;
+  it("Leer todas las ordenes correctamente", async () => {
+    const response = await requester.get("/orders");
+    const { statusCode } = response;
+    expect(statusCode).to.be.equals(200);
+  });
 
-        token = `${headers["set-cookie"][0]?.split("=")[0]}=${headers["set-cookie"][0].split("=")[1]}`;
+  it("Lee las ordenas de un usuario correctamente", async () => {
+    const response = await requester.get("/orders/" + uid);
+    const { statusCode } = response;
+    expect(statusCode).to.be.equals(200);
+  });
 
-        expect(_body.statusCode).to.be.equals(200);
-    });
+  it("Actualizacion de un orden correctamente", async () => {
+    const response = await requester.put("/orders").send(prod_update);
+    const { statusCode } = response;
+    expect(statusCode).to.be.equals(200);
+  });
 
-    it("Creación de producto", async () => {
-        const response = await requester.post("/products/").send(productData).set("Cookie", [token]);
-        const { _body } = response;
+  it("Retornar el total de la suma de las ordenes de un usuario correctamente", async () => {
+    const response = await requester.get("/orders/total/" + uid);
+    const { statusCode } = response;
+    expect(statusCode).to.be.equals(200);
+  }); 
 
-        expect(_body.statusCode).to.be.equals(201);
-    });
+  it("Eliminación de una orden correctamente", async () => {
+    const response = await requester.delete("/orders/" + oid)
+    const { statusCode } = response;
+    expect(statusCode).to.be.equals(200);
+  }); 
 
-    it("Obtener todos los productos", async () => {
-        const response = await requester.get(`/products`)
+  })  
 
-        const { _body } = response;
 
-        expect(_body.statusCode).to.be.equals(200);
-    });
-
-    it("Obtener un producto", async () => {
-        const productsResponse = await requester.get(`/products`)
-        const { response: products } = productsResponse._body
-
-        const productId = products?.docs[0]._id
-
-        const response = await requester.get(`/products/${productId}`)
-
-        const { _body } = response;
-
-        expect(_body.statusCode).to.be.equals(200);
-    });
-
-    it("Modificar producto", async () => {
-        const productsResponse = await requester.get(`/products`)
-        const { response: products } = productsResponse._body
-
-        const productId = products?.docs[0]._id
-
-        const response = await requester.put(`/products/${productId}`).send({ stock: 1000 }).set("Cookie", [token]);
-
-        const { _body } = response;
-
-        expect(_body.statusCode).to.be.equals(200);
-    });
-
-    it("Eliminar producto", async () => {
-        const productsResponse = await requester.get(`/products`)
-        const { response: products } = productsResponse._body
-
-        const productId = products?.docs[0]._id
-
-        const response = await requester.delete(`/products/${productId}`).set("Cookie", [token]);
-
-        const { _body } = response;
-
-        expect(_body.statusCode).to.be.equals(200);
-    });
-
-});
+})

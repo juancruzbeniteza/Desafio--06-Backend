@@ -1,0 +1,198 @@
+openapi: 3.0.0
+info:
+  title: Order API
+  description: CRUD operations for managing orders
+  version: 1.0.0
+paths:
+  /api/orders/:
+    post:
+      summary: Create a new order
+      tags: [Orders]
+      description: Create a new order with the provided data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pid:
+                  type: string
+                  description: The ID of the product
+                uid:
+                  type: string
+                  description: The ID of the user
+                quantity:
+                  type: number
+                  description: The quantity of the product
+                state:
+                  type: number
+                  description: The state of the order
+      responses:
+        '201':
+          description: Order created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          description: Bad request, invalid input data
+        '500':
+          description: Internal server error
+    get:
+      summary: Get a list of orders
+      tags: [Orders]
+      description: Retrieve a list of orders for the currently logged in user
+      responses:
+        '200':
+          description: A list of orders
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+        '400':
+          description: Bad request, invalid input data
+        '500':
+          description: Internal server error
+  /api/orders/{uid}:
+    get:
+      summary: Get a specific order
+      tags: [Orders]
+      description: Retrieve a specific order by user ID
+      parameters:
+        - in: path
+          name: uid
+          required: true
+          schema:
+            type: string
+            description: The ID of the user
+      responses:
+        '200':
+          description: Order retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          description: Bad request, invalid input data
+        '404':
+          description: Order not found
+        '500':
+          description: Internal server error
+  /api/orders/total/{uid}:
+    get:
+      summary: Get total orders
+      tags: [Orders]
+      description: Retrieve the total number of orders by user ID
+      parameters:
+        - in: path
+          name: uid
+          required: true
+          schema:
+            type: string
+            description: The ID of the user
+      responses:
+        '200':
+          description: Total orders retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: number
+                    description: The total number of orders
+        '400':
+          description: Bad request, invalid input data
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+  /api/orders/{oid}:
+    delete:
+      summary: Delete an order
+      tags: [Orders]
+      description: Delete an order by order ID
+      parameters:
+        - in: path
+          name: oid
+          required: true
+          schema:
+            type: string
+            description: The ID of the order to delete
+      responses:
+        '204':
+          description: Order deleted successfully
+        '404':
+          description: Order not found
+        '500':
+          description: Internal server error
+  /api/orders/{oid}/{quantity}/{state}:
+    put:
+      summary: Update an order
+      tags: [Orders]
+      description: Update an order by order ID with the provided quantity and state
+      parameters:
+        - in: path
+          name: oid
+          required: true
+          schema:
+            type: string
+            description: The ID of the order to update
+        - in: path
+          name: quantity
+          required: true
+          schema:
+            type: number
+            description: The new quantity of the order
+        - in: path
+          name: state
+          required: true
+          schema:
+            type: number
+            description: The new state of the order
+      responses:
+        '200':
+          description: Order updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          description: Bad request, invalid input data
+        '404':
+          description: Order not found
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    Order:
+      type: object
+      required:
+        - pid
+        - uid
+        - quantity
+        - state
+      properties:
+        pid:
+          type: string
+          description: The ID of the product
+        uid:
+          type: string
+          description: The ID of the user
+        quantity:
+          type: number
+          description: The quantity of the product
+        state:
+          type: number
+          description: The state of the order
+        createdAt:
+          type: string
+          format: date-time
+          description: The datetime when the order was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: The datetime when the order was last updated

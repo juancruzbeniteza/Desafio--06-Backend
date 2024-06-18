@@ -6,7 +6,7 @@ class ProductService{
 
     create=async (data)=>{
        try {
-        const response= await this.model.create(data);
+        const response= await this.repository.create(data);
         return response
        } catch (error) {
         throw error

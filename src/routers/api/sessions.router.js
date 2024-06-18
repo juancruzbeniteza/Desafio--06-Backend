@@ -1,7 +1,7 @@
-import CustomRouter from '../CustomRouter.js';
-import has8char from '../../middlewares/has8char.js';
-import passCb from '../../middlewares/passCb.js';
-import passport from 'passport';
+import CustomRouter from "../CustomRouter.js";
+import has8char from "../../middlewares/has8char.js";
+import passport from "../../middlewares/passport.js";
+import passCallBack from "../../middlewares/passCallBack.js";
 import {
   register,
   login,
@@ -10,45 +10,56 @@ import {
   forbidden,
   signoutError,
   badauth,
-  verifyAccount
-} from '../../controllers/sessionController.js';
+  verifyAccount,
+} from "../../controllers/sessionController.js";
 
 class SessionsRouter extends CustomRouter {
   init() {
-    // Register
-    this.post("/register", ["PUBLIC"], has8char, passCb("register"), register);
+    //google
+    /* this.post(
+        "/google",
+        passport.authenticate("google", { scope: ["email", "profile"] }));
 
-    // Login
-    this.post("/login", ["PUBLIC"], passCb("login"), login);
+      //google-callback
+      this.get(
+        "/google/cb",
+        passport.authenticate("google", {
+          session: false,
+          failureRedirect: "/api/sessions/badauth",
+        }),
+        async (req, res, next) => {
+          try {
+            return res.success200({
+              message: "Logged in with google!",
+              session: req.session,
+            })
+              
+          } catch (error) {
+            return next(error);
+          }
+        }
+      ); */
 
-    // Sign out
-    this.post("/signout", ["USER", "ADMIN", "PREM"], passCb("jwt"), signout);
+    //register
+    this.post("/register", ["PUBLIC"], has8char, passCallBack("register"), register);
 
-    // Google Authentication
-    this.get("/google", ["PUBLIC"], passport.authenticate("google", { scope: ["email", "profile"] }));
-    
-    this.get("/google/callback", ["PUBLIC"], passport.authenticate("google", {
-      successRedirect: "/",
-      failureRedirect: "/login",
-    }));
+    //login
+    this.post("/login", ["PUBLIC"], passCallBack("login"), login);
 
-     // Me
-    this.post("/", ["USER", "ADMIN", "PREM"], passCb("jwt"), me);
+    //signout
+    this.post("/signout", ["USER", "ADMIN", "PREM"], passCallBack("jwt"), signout);
 
-    this.get("/signoutError", ["PUBLIC"], signoutError);
-
-    this.post("/verifyAccount", ["PUBLIC"], verifyAccount);
-
-    // Badauth
+    //badauth
     this.get("/badauth", ["PUBLIC"], badauth);
 
-    // Forbidden
+    //forbidden
     this.get("/forbidden", ["PUBLIC"], forbidden);
 
-    // Signout Error
+    //me
+    this.post("/", ["USER", "ADMIN", "PREM"], passCallBack("jwt"), me);
+
     this.get("/signoutError", ["PUBLIC"], signoutError);
 
-    // Verify Account
     this.post("/verifyAccount", ["PUBLIC"], verifyAccount);
   }
 }

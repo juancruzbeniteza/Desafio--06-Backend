@@ -1,0 +1,192 @@
+openapi: 3.0.0
+info:
+  title: User API
+  description: CRUD operations for managing users
+  version: 1.0.0
+paths:
+  /api/users/:
+    post:
+      summary: Create a new user
+      tags: [Users]
+      description: Create a new user with the provided data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The name of the user
+                photo:
+                  type: string
+                  description: The URL of the user's photo
+                email:
+                  type: string
+                  description: The email of the user
+                password:
+                  type: string
+                  description: The password of the user
+                role:
+                  type: number
+                  description: The role of the user (0, 1, or 2)
+                verified:
+                  type: boolean
+                  description: The verification status of the user
+                verifiedCode:
+                  type: string
+                  description: The verification code of the user
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Bad request, invalid input data
+        '500':
+          description: Internal server error
+    get:
+      summary: Get a list of users
+      tags: [Users]
+      description: Retrieve a list of users based on the provided filter and pagination parameters
+      parameters:
+        - in: query
+          name: filter
+          schema:
+            type: object
+            description: Object containing filter parameters
+        - in: query
+          name: sortAndPaginate
+          schema:
+            type: object
+            description: Object containing sort and pagination parameters
+      responses:
+        '200':
+          description: A list of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '400':
+          description: Bad request, invalid input data
+        '500':
+          description: Internal server error
+  /api/users/{id}:
+    put:
+      summary: Update a user
+      tags: [Users]
+      description: Update a user with the provided data
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            description: The ID of the user to update
+        - in: body
+          name: data
+          description: The data to update the user with
+          required: true
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The new name of the user
+              photo:
+                type: string
+                description: The new URL of the user's photo
+              email:
+                type: string
+                description: The new email of the user
+              password:
+                type: string
+                description: The new password of the user
+              role:
+                type: number
+                description: The new role of the user (0, 1, or 2)
+              verified:
+                type: boolean
+                description: The new verification status of the user
+              verifiedCode:
+                type: string
+                description: The new verification code of the user
+      responses:
+        '200':
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Bad request, invalid input data
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+    delete:
+      summary: Delete a user
+      tags: [Users]
+      description: Delete a user with the provided ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            description: The ID of the user to delete
+      responses:
+        '204':
+          description: User deleted successfully
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - name
+        - email
+        - password
+      properties:
+        name:
+          type: string
+          description: The name of the user
+        photo:
+          type: string
+          default: "https://cdn-icons-png.flaticon.com/512/74/74472.png"
+          description: The URL of the user's photo
+        email:
+          type: string
+          description: The email of the user
+        password:
+          type: string
+          description: The password of the user
+        role:
+          type: number
+          default: 1
+          enum: [0, 1, 2]
+          description: The role of the user (0, 1, or 2)
+        verified:
+          type: boolean
+          default: false
+          description: The verification status of the user
+        verifiedCode:
+          type: string
+          default: "<randomly generated base64 string>"
+          description: The verification code of the user
+        createdAt:
+          type: string
+          format: date-time
+          description: The datetime when the user was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: The datetime when the user was last updated

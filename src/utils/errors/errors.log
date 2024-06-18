@@ -26,3 +26,10 @@ ERROR: Failed to deserialize user out of session
 ERROR: Failed to deserialize user out of session
 ERROR: users.readById is not a function
 ERROR: users.readById is not a function
+ERROR: Failed to deserialize user out of session
+ERROR: Failed to deserialize user out of session
+ERROR: Failed to deserialize user out of session
+ERROR: repository.findById is not a function
+ERROR: repository.findById is not a function
+ERROR: this.model.findById is not a function
+ERROR: this.model.findById is not a function

@@ -3,13 +3,11 @@ info:
   title: Product API
   description: CRUD operations for managing products
   version: 1.0.0
-servers:
-  - url: http://localhost:3000
-    description: Development server
 paths:
-  /products:
+  /api/products/:
     post:
       summary: Create a new product
+      tags: [Products]
       description: Create a new product with the provided data
       requestBody:
         required: true
@@ -43,6 +41,7 @@ paths:
           description: Internal server error
     get:
       summary: Get a list of products
+      tags: [Products]
       description: Retrieve a list of products based on the provided filter and pagination parameters
       parameters:
         - in: query
@@ -68,9 +67,10 @@ paths:
           description: Bad request, invalid input data
         '500':
           description: Internal server error
-  /products/{id}:
+  /api/products/{id}:
     put:
       summary: Update a product
+      tags: [Products]
       description: Update a product with the provided data
       parameters:
         - in: path
@@ -100,7 +100,7 @@ paths:
                 description: The new available stock of the product
       responses:
         '200':
-          description: Product update successful
+          description: Product updated successfully
           content:
             application/json:
               schema:
@@ -113,6 +113,7 @@ paths:
           description: Internal server error
     delete:
       summary: Delete a product
+      tags: [Products]
       description: Delete a product with the provided ID
       parameters:
         - in: path
@@ -142,7 +143,7 @@ components:
           description: The title of the product
         photo:
           type: string
-          default: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.apple.com%2Fla%2Fnewsroom%2F2023%2F09%2Fapple-debuts-iphone-15-and-iphone-15-plus%2F&psig=AOvVaw3VtU_VM10s2BiEWyAU4EEb&ust=1717473900580000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCOCrxYHHvoYDFQAAAAAdAAAAABAI"
+          default: "https://shopnguyenlieumypham.com/wp-content/uploads/no-image/product-456x456.jpg"
           description: The URL of the product photo
         price:
           type: number

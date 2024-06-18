@@ -7,7 +7,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js --env dev",
-    "test": "nodemon ./server.js --env test"
+    "test": "nodemon ./server.js --env test",
+    "super": "mocha ./test/supertest"
   },
   "keywords": [],
   "author": "",
