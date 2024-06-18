@@ -33,3 +33,5 @@ ERROR: repository.findById is not a function
 ERROR: repository.findById is not a function
 ERROR: this.model.findById is not a function
 ERROR: this.model.findById is not a function
+ERROR: Error finding user by ID: this.model.findById is not a function
+ERROR: Error finding user by ID: this.model.findById is not a function
