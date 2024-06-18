@@ -1,38 +1,42 @@
 <section
-    class="w-50 mb-4 d-flex flex-column justify-content-start align-items-center"
-    style="min-width: 380px;"
+  class="w-50 mb-4 d-flex flex-column justify-content-start align-items-center"
+  style="min-width: 380px;"
+>
+  <h2 class="mt-5 mb-2 text-center">Create Your Account</h2>
+  <form
+    id="registerForm"
+    style="max-width: 360px;"
+    class="w-100 d-flex flex-column justify-content-center align-items-center"
   >
-    <h2 class="mt-5 mb-2 text-center">Create</h2>
-    <form
-      style="max-width: 360px;"
-      class="w-100 d-flex flex-column justify-content-center items-align-center"
-    >
-      <fieldset class="mb-3 text-center">
-        <label for="name" class="form-label mb-0">Name</label>
-        <input type="text" class="form-control" id="name" />
-      </fieldset>
-      <fieldset class="mb-3 text-center">
-        <label for="photo" class="form-label mb-0">Photo</label>
-        <input type="text" class="form-control" id="photo" />
-      </fieldset>
-      <fieldset class="mb-3 text-center">
-        <label for="email" class="form-label mb-0">Email</label>
-        <input type="email" class="form-control" id="email" />
-      </fieldset>
-      <fieldset class="mb-3 text-center">
-        <label for="password" class="form-label mb-0">Password</label>
-        <input type="password" class="form-control" id="password" />
-      </fieldset>
-      
-      <button
-        id="register"
-        type="button"
-        class="w-100 btn btn-danger"
-      >CREATE!</button>
-    </form>
+    <fieldset class="mb-3 text-center">
+      <label for="name" class="form-label mb-0">Name</label>
+      <input type="text" class="form-control" id="name" placeholder="Enter your name" />
+    </fieldset>
+    <fieldset class="mb-3 text-center">
+      <label for="photo" class="form-label mb-0">Photo URL</label>
+      <input type="text" class="form-control" id="photo" placeholder="Enter your photo URL" />
+    </fieldset>
+    <fieldset class="mb-3 text-center">
+      <label for="email" class="form-label mb-0">Email</label>
+      <input type="email" class="form-control" id="email" placeholder="Enter your email" />
+    </fieldset>
+    <fieldset class="mb-3 text-center">
+      <label for="password" class="form-label mb-0">Password</label>
+      <input type="password" class="form-control" id="password" placeholder="Enter your password" />
+    </fieldset>
+    
+    <button
+      id="register"
+      type="button"
+      class="w-100 btn btn-danger"
+    >CREATE</button>
+  </form>
 
-    <button id="google-register-button">Register with Google</button>
-  </section>
+    <a href="/api/sessions/google" class="btn btn-outline-danger mt-3 w-100">
+    <img src="https://www.imtlucca.it/sites/default/files/kisspng-google-logo-logo-logo-5ade7dc753b015.9317679115245306313428.jpg" alt="Google Logo" style="width: 20px; margin-right: 10px;" />
+    Register with Google
+  </a>
+
+</section>
 
 <script src="/register.js"></script>
-  

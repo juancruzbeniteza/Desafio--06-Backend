@@ -1,44 +1,46 @@
 <main>
-  <h1 class="text-center pt-5 pb-3">Ecommerce de Tecnologia
-  </h1>
+  <h1 class="text-center pt-5 pb-3">Ecommerce de Tecnología</h1>
   <img
     width="100%"
     src="https://www.womenintech.co.uk/wp-content/uploads/2021/11/Tech-skills-2022-1.png"
+    alt="Tech Skills 2022"
+    class="img-fluid"
   />
-<section class=" py-3 position-relative d-flex justify-content-center align-items-center">
+  <section class="py-3 position-relative d-flex justify-content-center align-items-center">
     <input
       id="text"
       type="text"
-      style="width: 250px; border-radius:10px"
+      style="width: 250px; border-radius: 10px;"
       class="p-2 text-center"
-      placeholder="search..."
+      placeholder="Search..."
     />
   </section>
-  <section >
+  <section>
     <article class="d-flex flex-wrap justify-content-center" id="products">
-        {{#each products}}
-            <div class="card m-2" style="width: 360px">
-                <img src={{this.photo}} style="height: 240px" class="card-img-top object-fit-cover" alt="${each.title}">
-                <h5 class="p-2 text-center card-title">{{this.title}}</h5>
-            </div>
-        {{/each}}
+      {{#each products}}
+        <div class="card m-2" style="width: 360px;">
+          <img src="{{this.photo}}" style="height: 240px;" class="card-img-top object-fit-cover" alt="{{this.title}}">
+          <div class="card-body">
+            <h5 class="p-2 text-center card-title">{{this.title}}</h5>
+          </div>
+        </div>
+      {{/each}}
     </article>
-</section>
+  </section>
 
-  <span class="w-100 d-flex justify-content-center">
+  <div class="w-100 d-flex justify-content-center">
     {{#if prev}}
       <a
         class="btn btn-primary fs-5 m-4 mt-0"
         href="/?title={{filter}}&page={{prev}}"
       >PREV</a>
-     {{/if}}
+    {{/if}}
     {{#if next}}
       <a
         class="btn btn-primary fs-5 m-4 mt-0"
         href="/?title={{filter}}&page={{next}}"
       >NEXT</a>
-     {{/if}} 
-  </span>
-
+    {{/if}}
+  </div>
 </main>
 <script src="/index.js"></script>

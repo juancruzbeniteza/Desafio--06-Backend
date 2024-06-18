@@ -17,3 +17,4 @@ export default (strategy) => {
     })(req, res, next);
   };
 };
+

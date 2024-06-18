@@ -6,7 +6,7 @@ let collection = "users";
 
 const schema = new Schema({
   name: { type: String, required: true },
-  photo: { type: String, default:"https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pngwing.com%2Fes%2Ffree-png-dxldr&psig=AOvVaw1B7ZklWRlKCF1dvQNZoGlk&ust=1711823994857000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCMi3isOPmoUDFQAAAAAdAAAAABAE" },
+  photo: { type: String, default:"https://as2.ftcdn.net/v2/jpg/00/64/67/63/1000_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg" },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   role: {type: Number, default: 1 , enum:[0,1,2]},

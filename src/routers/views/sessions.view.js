@@ -5,7 +5,7 @@ class SessionsRouter extends CustomRouter{
     this.get('/register', ["PUBLIC"], async (req, res, next) => {
         try{
             return res.render("register",{})
-        }catch(error){
+        }catch(error) {
             next(error)
         }
     })

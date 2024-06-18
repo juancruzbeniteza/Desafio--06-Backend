@@ -1,0 +1,28 @@
+ERROR: getaddrinfo ENOTFOUND ac-qgg0ija-shard-00-00.dogphdo.mongodb.net
+ERROR: E11000 duplicate key error collection: Back-end.users index: email_1 dup key: { email: "juancruzbeniteza@gmail.com" }
+ERROR: E11000 duplicate key error collection: Back-end.users index: email_1 dup key: { email: "juancruzbeniteza@gmail.com" }
+ERROR: getaddrinfo ENOTFOUND ac-qgg0ija-shard-00-00.dogphdo.mongodb.net
+ERROR: getaddrinfo ENOTFOUND ac-qgg0ija-shard-00-00.dogphdo.mongodb.net
+ERROR: Unknown authentication strategy "login"
+ERROR: Unknown authentication strategy "login"
+ERROR: Unknown authentication strategy "login"
+ERROR: Unknown authentication strategy "login"
+ERROR: Unknown authentication strategy "login"
+ERROR: Failed to serialize user into session
+ERROR: Failed to serialize user into session
+ERROR: Failed to serialize user into session
+ERROR: Failed to serialize user into session
+ERROR: Failed to serialize user into session
+ERROR: users.readById is not a function
+ERROR: users.readById is not a function
+ERROR: users.readById is not a function
+ERROR: users.readById is not a function
+ERROR: users.readById is not a function
+ERROR: users.readById is not a function
+ERROR: users.readById is not a function
+ERROR: Failed to deserialize user out of session
+ERROR: Failed to deserialize user out of session
+ERROR: Failed to deserialize user out of session
+ERROR: Failed to deserialize user out of session
+ERROR: users.readById is not a function
+ERROR: users.readById is not a function
