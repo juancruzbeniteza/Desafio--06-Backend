@@ -1,6 +1,5 @@
 [
   {
-    "_id":"6657807ec2ca017027937b83",
     "title": "Smartphone",
     "description": "High-end smartphone with advanced features.",
     "price": 799.99,
@@ -9,7 +8,6 @@
     "stock": 50
   },
   {
-    "_id":"6657807ec2ca017027937b84",
     "title": "Laptop",
     "description": "Powerful laptop with a sleek design.",
     "price": 1299.99,
@@ -18,7 +16,6 @@
     "stock": 30
   },
   {
-    "_id":"6657807ec2ca017027937b85",
     "title": "Smart TV",
     "description": "Ultra HD smart television with smart features.",
     "price": 899.99,
@@ -27,7 +24,6 @@
     "stock": 20
   },
   {
-    "_id":"6657807ec2ca017027937b86",
     "title": "Digital Camera",
     "description": "Professional digital camera with high-resolution capabilities.",
     "price": 499.99,
@@ -36,12 +32,107 @@
     "stock": 15
   },
   {
-    "_id":"6657807ec2ca017027937b87",
     "title": "Wireless Earbuds",
     "description": "Premium wireless earbuds with noise-cancellation technology.",
     "price": 149.99,
     "photo": "https://goudenimportaciones.com/wp-content/uploads/2022/11/MQD83.jpg",
     "code": "EB234",
+    "stock": 40
+  },
+  {
+    "title": "Ipad Pro 11 pulgadas",
+    "description": "Chip M4 de Apple con un rendimiento de escándalo para tareas profesionales y autonomía de sol a sol¹ Pantalla Ultra Retina XDR² con ProMotion, gama cromática amplia P3 y True Tone (opción con vidrio nanotexturizado) Cámara Pro con escáner LiDAR y ultra gran angular frontal de 12 Mpx en horizontal con Encuadre Centrado Conexión Wi‑Fi 6E y 5G para descargas ultrarrápidas y streaming en alta calidad³ Compatible con el Apple Pencil Pro, Apple Pencil (USB-C), Magic Keyboard para el iPad Pro y Smart Folio⁴",
+    "price": 1199,
+    "photo": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/ipadpro11-digitalmat-gallery-1-202404?wid=728&hei=666&fmt=png-alpha&.v=1713308651643",
+    "code": "EB235",
+    "stock": 40
+  },
+  {
+    "title": "Apple Watch Ultra",
+    "description": "La resistente caja de titanio de 49 mm con botón Acción personalizable combina durabilidad, ligereza y resistencia a la corrosión Con el nuevo SiP S9 llega nuestra pantalla más brillante y una forma mágica de interactuar con tu reloj El GPS más preciso en un reloj deportivo en entornos urbanos llenos de obstáculos Hasta 36 horas de autonomía, hasta 72 horas con el modo de bajo consumo y hasta 17 horas de entreno con el modo de bajo consumo Combínalo con tres correas especialmente diseñadas para aventuras al aire libre, deportes acuáticos y todo tipo de entrenos",
+    "price": 899,
+    "photo": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/watch-ultra2-digitalmat-gallery-1-202309_GEO_ES?wid=728&hei=666&fmt=jpeg&qlt=95&.v=1693846567211",
+    "code": "EB236",
+    "stock": 40
+  },
+  {
+    "title": "Apple TV 4K",
+    "description": "Imagen 4K. Las luces y las sombras más intensas se aprecian con un nivel de detalle impresionante en los formatos HDR avanzados, como Dolby Vision y HDR10+, la gran novedad de esta temporada. Todo se ve tan bien que no querrás perderte ni los créditos.",
+    "price": 189,
+    "photo": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/apple-tv-4k-hero-select-202210?wid=1076&hei=1070&fmt=jpeg&qlt=95&.v=1664896361408",
+    "code": "EB237",
+    "stock": 40
+  },
+  {
+    "title": "Apple IMac",
+    "description": "Superpotenciado con el chip M3 de Apple, para que lo hagas todo a toda velocidad Espectacular pantalla Retina 4,5K de 24 pulgadas Pie de página¹ Diseño todo en uno superfino en siete increíbles colores Una calidad de imagen y sonido alucinante con la cámara FaceTime HD a 1080p, el conjunto de tres micrófonos y el sistema de seis altavoces con audio espacial Ratón Magic Mouse y teclado Magic Keyboard del mismo color",
+    "price": 1619,
+    "photo": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/imac24-digitalmat-gallery-1-202310?wid=728&hei=666&fmt=png-alpha&.v=1697559004117",
+    "code": "EB238",
+    "stock": 40
+  },
+  {
+    "title": "Apple AirTag",
+    "description": "Pon un AirTag a tus llaves o a tu mochila. Si se extravían, podrás usar la app Buscar y ubicarlas enseguida. Puedes compartir un AirTag con hasta cinco personas para que nadie pierda de vista los objetos que usáis en común.",
+    "price": 39,
+    "photo": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/airtag-single-select-202104_FV1?wid=890&hei=740&fmt=jpeg&qlt=90&.v=1617761670000",
+    "code": "EB239",
+    "stock": 40
+  },
+  {
+    "title": "Apple Mac mini",
+    "description": "Chips M2 o M2 Pro de última generación que te permiten hacer tus tareas mejor y más rápido. Con el Mac mini, tu escritorio se transforma en una estación de trabajo avanzada para que puedas crear, programar y colaborar El Mac mini te permite personalizar tu espacio de trabajo con dos o cuatro puertos Thunderbolt 4, dos puertos USB-A, HDMI y Gigabit Ethernet Completa tu sistema con un Studio Display y accesorios Magic",
+    "price": 718,
+    "photo": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/mac-mini-digitalmat-gallery-1-202301?wid=728&hei=666&fmt=png-alpha&.v=1670038163709",
+    "code": "EB240",
+    "stock": 40
+  },
+  {
+    "title": "Apple Mac Studio",
+    "description": "Con M2 Max o M2 Ultra, nuestros chips más potentes hasta la fecha Un montón de puertos de alto rendimiento para que trabajes con todo lo que necesites y mucho más Un diseño increíblemente compacto que queda de lujo en tu mesa Hace el tándem perfecto con el Studio Display y admite hasta ocho monitores",
+    "price": 2428,
+    "photo": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/mac-studio-digitalmat-gallery-1-202306?wid=728&hei=666&fmt=png-alpha&.v=1683914326094",
+    "code": "EB241",
+    "stock": 40
+  },
+  {
+    "title": "Apple Studio Display",
+    "description": "Pantalla Retina 5K de 27 pulgadas con 14,7 millones de píxeles y mil millones de colores que te deslumbrará en todos los sentidos Ultra gran angular de 12 Mpx con Encuadre Centrado y la potencia del chip de Apple para que disfrutes más que nunca de las videollamadas Tres micrófonos con calidad de estudio y sistema de seis altavoces con audio espacial para que todo suene de película Máxima versatilidad gracias a puertos de conexión y carga y tres opciones de soporte Hace un tándem perfecto con todos los Mac, incluido el nuevo Mac Studio. Añade los nuevos accesorios Magic a juego para que a tu estudio no le falte detalle.",
+    "price": 1779,
+    "photo": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/studio-display-digitalmat-gallery-1-202203?wid=728&hei=666&fmt=png-alpha&.v=1645207692041",
+    "code": "EB242",
+    "stock": 40
+  },
+  {
+    "title": "Apple Mac Pro",
+    "description": "Superpotenciado con el M2 Ultra, nuestro chip más avanzado Ranuras de expansión PCIe de cuarta generación con hasta el doble de ancho de banda para procesos especializados Sistema de E/S de alto rendimiento con ocho puertos Thunderbolt 4, dos puertos HDMI y dos puertos Ethernet de 10 Gb Ultrasilencioso y no se calienta, incluso con cargas de trabajo intensas Incluye accesorios Magic. Opción de añadir un Pro Display XDR.",
+    "price": 8398,
+    "photo": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/mac-pro-digitalmat-gallery-1-202306?wid=728&hei=666&fmt=jpeg&qlt=95&.v=1683842315753",
+    "code": "EB243",
+    "stock": 40
+  },
+  {
+    "title": "Apple Pencil Pro",
+    "description": "El Apple Pencil Pro lleva tus ideas a otro nivel con funciones aún más mágicas. Vas a poder hacer anotaciones, tomar apuntes y desatar tu creatividad de forma más intuitiva.",
+    "price": 149,
+    "photo": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MX2D3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1713841707336",
+    "code": "EB244",
+    "stock": 40
+  },
+  {
+    "title": "Apple Magic Keyboard",
+    "description": "El Magic Keyboard para el iPad Pro con trackpad integrado es comodísimo para escribir. Además, tiene un nuevo diseño fino y compacto con reposamuñecas en aluminio. Incluye una fila de 14 teclas de función que te dan acceso directo al brillo de la pantalla o los controles del volumen, entre otras funciones, y un conector USB‑C de carga simultánea. Su diseño con apoyo flotante te permite ajustar el ángulo de la pantalla como prefieras.",
+    "price": 399,
+    "photo": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MWR43E?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1713934215783",
+    "code": "EB245",
+    "stock": 40
+  },
+  {
+    "title": "Apple Cartera de Trenzado fino con MagSafe",
+    "description": "La nueva cartera de trenzado fino con MagSafe para el iPhone es la forma más elegante y cómoda de tener siempre a mano tus carnés y tarjetas de crédito. Ahora es compatible con la prestación Buscar, así que puedes recibir una notificación con su última ubicación conocida si alguna vez se separa del teléfono.",
+    "price": 69,
+    "photo": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MT273?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1692994301006",
+    "code": "EB246",
     "stock": 40
   }
 ]

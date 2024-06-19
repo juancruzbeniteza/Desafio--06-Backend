@@ -1,35 +1,21 @@
-import dao from "../data/factory.js";
-import UsersDto from "../dto/user.dto.js";
-
-const { users } = dao;
+import User from "../data/mongo/models/users.models.js"; // Ensure the correct path to the User model
 
 class UsersRep {
   constructor() {
-    this.model = users;
+    this.model = User; // Assign the Mongoose User model to this.model
   }
 
-  create = async (data) => await this.model.create(new UsersDto(data));
+  // Create method
+  create = async (data) => await this.model.create(data);
 
-  read = async ({ filter, options }) =>
-    await this.model.read({ filter, options });
-
-  readOne = async (id) => await this.model.readOne(id);
-
-  update = async (id, data) => await this.model.update(id, data);
-
-  destroy = async (id) => await this.model.destroy(id);
-
-  readByEmail = async (email) => await this.model.readByEmail(email);
-
-  findById = async (id) => {
-    try {
-      return await this.model.findById(id).exec();
-    } catch (error) {
-      throw new Error(`Error finding user by ID: ${error.message}`);
-    }
-  };
+  // Other methods...
+  read = async ({ filter, options }) => await this.model.find(filter, null, options).exec();
+  readOne = async (id) => await this.model.findById(id).exec();
+  update = async (id, data) => await this.model.findByIdAndUpdate(id, data, { new: true }).exec();
+  destroy = async (id) => await this.model.findByIdAndDelete(id).exec();
+  readByEmail = async (email) => await this.model.findOne({ email }).exec();
+  findById = async (id) => await this.model.findById(id).exec(); // Ensure findById method is implemented
 }
 
 const repository = new UsersRep();
-
 export default repository;

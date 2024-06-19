@@ -35,3 +35,9 @@ ERROR: this.model.findById is not a function
 ERROR: this.model.findById is not a function
 ERROR: Error finding user by ID: this.model.findById is not a function
 ERROR: Error finding user by ID: this.model.findById is not a function
+ERROR: Error finding user by ID: this.model.findById is not a function
+ERROR: Error finding user by ID: this.model.findById is not a function
+ERROR: Cast to string failed for value "{ email: 'juancruzbeniteza@gmail.com' }" (type Object) at path "email" for model "User"
+ERROR: Cast to string failed for value "{ email: 'benitezarcejuancruz@gmail.com' }" (type Object) at path "email" for model "User"
+ERROR: Cast to string failed for value "{ email: 'juancruzbeniteza@gmail.com' }" (type Object) at path "email" for model "User"
+ERROR: Cast to string failed for value "{ email: 'juancruzbeniteza@gmail.com' }" (type Object) at path "email" for model "User"
