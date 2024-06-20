@@ -59,14 +59,40 @@ class UserService {
     }
   };
 
-  register = async (data) => {
+  register = async (data, next) => {
     try {
-      /* await sendEmail(data) */
+      const { email, password, name } = data;
+
+      // Check if the email already exists
+      const existingUser = await this.repository.readByEmail(email);
+      if (existingUser) {
+        return next(new Error('Email already in use.'));
+      }
+
+      // Hash the password
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
+
+      // Create a new user object
+      const userData = {
+        email,
+        password: hashedPassword,
+        name
+      };
+
+      // Save the user to the database
+      const user = await this.repository.create(new UsersDto(userData));
+
+      // Optionally, send a verification email
+      // await sendEmail(data);
+
+      return { message: 'User registered successfully', user };
     } catch (error) {
       return next(error);
     }
   };
 }
+
 
 const userService = new UserService();
 export default userService;
